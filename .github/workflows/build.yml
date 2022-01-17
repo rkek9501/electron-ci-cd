@@ -38,6 +38,11 @@ jobs:
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
-    - run: npm ci
-    - run: npm run lint
-    - run: npm run build:win64
+    - name: Npm Install
+      run: npm ci
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Build Electron Windows App
+      run: npm run build:win64
