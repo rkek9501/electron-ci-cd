@@ -16,6 +16,7 @@ jobs:
 
     strategy:
       matrix:
+        os: [windows-latest]
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -38,6 +39,7 @@ jobs:
 
     - name: Electron Builder Action
       uses: samuelmeuli/action-electron-builder@v1.6.0
+      if: startsWith(matrix.os, 'windows')
       with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
