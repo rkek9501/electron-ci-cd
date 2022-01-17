@@ -1,0 +1,63 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+  },
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:json/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "modules": true
+    },
+    "requireConfigFile": false,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "node",
+    "json"
+  ],
+  "rules": {
+    "node/no-unsupported-features": ["error", {
+      "ignores": [
+        "modules",
+        "asyncAwait"
+      ]
+    }],
+    "node/no-unsupported-features/es-syntax": ["off"],
+    "node/no-unpublished-import": ["off"],
+    "node/no-unpublished-require": ["off"],
+    "max-len": ["warn", {
+      "code": 150,
+      "ignoreTrailingComments": true,
+      "ignoreComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }],
+    // exceljs의 eachCell에서 reassign룰을 적용시키기 어려워서 설정.
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": ["cell"]
+    }],
+    // airbnb 룰에서 error를 warn으로 만들어 주는 부분.
+    "no-loop-func": ["warn"],
+    "no-await-in-loop": ["warn"], // 15
+    "no-restricted-syntax": ["warn"], // 31
+    // warn이 너무 많아져서 무시하게 되서 일단 off 시킴.
+    "camelcase": ["off"],
+    "no-console": ["off"],
+    "no-underscore-dangle": ["off"],
+    "semi": ["error", "always"]
+  },
+  "ignorePatterns": ["node_modules/", ".eslintrc.js"]
+}

@@ -5,6 +5,16 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "build:osx": "electron-builder --mac",
+    "build:linux": "run build:linux32 && npm run build:linux64",
+    "build:linux32": "electron-builder --linux --ia32",
+    "build:linux64": "electron-builder --linux --x64",
+    "build:linuxarm": "electron-builder --linux --armv7l",
+    "build:win": "npm run build:win32 && npm run build:win64",
+    "build:win32": "electron-builder --win --ia32",
+    "build:win64": "electron-builder --win --x64",
+    "build": "npm run build:linux && npm run build:osx && npm run build:win",
+    "lint": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,10 +23,54 @@
     "cd"
   ],
   "author": "doyoung",
-  "license": "ISC", 
+  "license": "ISC",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.1.0",
     "electron": "^16.0.7",
-    "electron-builder": "^22.14.5"
+    "electron-builder": "^22.14.5",
+    "eslint": "^8.6.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0"
+  },
+  "build": {
+    "appId": "kr.cedar.electron.test",
+    "asar": "true",
+    "files": [],
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "icon": "./resources/installer/Icon.icns"
+    },
+    "dmg": {
+      "title": "DoorderAgentPC",
+      "icon": "./resources/installer/Icon.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "resources/installer/Icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "단축아이콘 이름"
+    },
+    "directories": {
+      "buildResources": "resources/installer/",
+      "output": "dist/",
+      "app": "."
+    }
   }
 }
