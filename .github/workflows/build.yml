@@ -38,6 +38,6 @@ jobs:
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
-    - run: npm i
+    - run: npm ci
     - run: npm run lint
     - run: npm run build:win64
