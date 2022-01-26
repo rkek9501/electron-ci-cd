@@ -13,5 +13,6 @@ app.on('window-all-closed', () => {
 });
 
 app.whenReady().then(() => {
+  console.log('app is ready!');
   createWindow();
 });
